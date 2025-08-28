@@ -1,119 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Scientific Calculator</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      font-family: 'Orbitron', sans-serif;
-      transition: 0.5s;
-    }
-    body.light {
-      background: linear-gradient(135deg, #f3f3f3, #c0c0c0, #999);
-    }
-    .calculator {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(20px);
-      border-radius: 25px;
-      padding: 15px;
-      width: 95%;
-      max-width: 450px;
-      box-shadow: 0 0 50px rgba(0,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.2);
-      transition: 0.5s;
-    }
-    body.light .calculator {
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 0 30px rgba(0,0,0,0.2);
-      border: 1px solid rgba(0,0,0,0.2);
-    }
-    .screen {
-      width: 100%;
-      height: 60px;
-      font-size: 1.8rem;
-      border: none;
-      border-radius: 15px;
-      background: rgba(0,0,0,0.3);
-      color: #0ff;
-      text-align: right;
-      padding: 10px;
-      margin-bottom: 15px;
-      box-shadow: inset 0 0 10px rgba(0,255,255,0.5);
-      overflow-x: auto;
-      transition: 0.5s;
-    }
-    body.light .screen {
-      background: rgba(255,255,255,0.7);
-      color: #000;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-    }
-    .btn {
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    }
-    .btn:active {
-      transform: scale(0.92);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    .number { background: #1e1e1e; color: #0ff; }
-    .number:hover { background: #0ff; color: #000; }
-    .operator { background: #ff00ff; color: #fff; }
-    .operator:hover { background: #ff99ff; color: #000; }
-    .function { background: #ffa500; color: #000; }
-    .function:hover { background: #ffd580; color: #000; }
-    .equal { background: #00ff00; color: #000; }
-    .equal:hover { background: #80ff80; color: #000; }
-    .clear { background: #ff0000; color: #fff; }
-    .clear:hover { background: #ff8080; color: #000; }
-    .toggle {
-      grid-column: span 6;
-      margin-top: 8px;
-      background: #222;
-      color: #0ff;
-    }
-    body.light .toggle {
-      background: #ccc;
-      color: #333;
-    }
-    @media (max-width: 600px) {
-      .screen { font-size: 1.5rem; height: 50px; }
-      .btn { padding: 10px; font-size: 0.9rem; }
-    }
-    @media (max-width: 400px) {
-      .buttons { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-      .btn { padding: 8px; font-size: 0.85rem; }
-      .toggle { grid-column: span 4; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Animated Scientific Calculator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Orbitron', sans-serif;
+    transition: 0.5s;
+    color: #0ff;
+  }
+  body.light {
+    background: linear-gradient(135deg, #f3f3f3, #c0c0c0, #999);
+    color: #000;
+  }
+  .calculator {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 15px;
+    width: 95%;
+    max-width: 450px;
+    box-shadow: 0 0 50px rgba(0,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: 0.5s;
+    user-select: none;
+  }
+  body.light .calculator {
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+  .screen {
+    width: 100%;
+    height: 60px;
+    font-size: 1.8rem;
+    border: none;
+    border-radius: 15px;
+    background: rgba(0,0,0,0.3);
+    color: inherit;
+    text-align: right;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    box-shadow: inset 0 0 10px rgba(0,255,255,0.5);
+    overflow-x: auto;
+    white-space: nowrap;
+    font-weight: 700;
+    transition: 0.5s;
+  }
+  body.light .screen {
+    background: rgba(255,255,255,0.7);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .btn {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    background: #1e1e1e;
+    color: #0ff;
+    font-weight: 600;
+  }
+  .btn:active {
+    transform: scale(0.92);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  .number { background: #1e1e1e; color: #0ff; }
+  .number:hover { background: #0ff; color: #000; }
+  .operator { background: #ff00ff; color: #fff; }
+  .operator:hover { background: #ff99ff; color: #000; }
+  .function { background: #ffa500; color: #000; }
+  .function:hover { background: #ffd580; color: #000; }
+  .equal { background: #00ff00; color: #000; }
+  .equal:hover { background: #80ff80; color: #000; }
+  .clear { background: #ff0000; color: #fff; }
+  .clear:hover { background: #ff8080; color: #000; }
+  .dot { background: #1e1e1e; color: #0ff; }
+  .dot:hover { background: #0ff; color: #000; }
+  .toggle {
+    grid-column: span 6;
+    margin-top: 8px;
+    background: #222;
+    color: #0ff;
+    font-weight: 700;
+  }
+  body.light .toggle {
+    background: #ccc;
+    color: #333;
+  }
+  @media (max-width: 600px) {
+    .screen { font-size: 1.5rem; height: 50px; }
+    .btn { padding: 10px; font-size: 0.9rem; }
+  }
+  @media (max-width: 400px) {
+    .buttons { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .btn { padding: 8px; font-size: 0.85rem; }
+    .toggle { grid-column: span 4; }
+  }
+</style>
 </head>
 <body>
-  <div class="calculator">
-    <input type="text" class="screen" id="screen" readonly>
+  <div class="calculator" role="application" aria-label="Scientific Calculator">
+    <input type="text" class="screen" id="screen" aria-live="polite" aria-atomic="true" readonly />
     <div class="buttons">
       <button class="btn function" data-func="sin">sin</button>
       <button class="btn function" data-func="cos">cos</button>
       <button class="btn function" data-func="tan">tan</button>
       <button class="btn function" data-func="sqrt">√</button>
       <button class="btn function" data-func="log">log</button>
-      <button class="btn clear">C</button>
+      <button class="btn clear" aria-label="Clear">C</button>
       <button class="btn number">7</button>
       <button class="btn number">8</button>
       <button class="btn number">9</button>
@@ -134,107 +144,182 @@
       <button class="btn function" data-func="exp">e</button>
       <button class="btn number">0</button>
       <button class="btn dot">.</button>
-      <button class="btn equal" id="equals">=</button>
+      <button class="btn equal" id="equals" aria-label="Equals">=</button>
       <button class="btn operator" data-operator="+">+</button>
       <button class="btn function" data-func="powY">xʸ</button>
       <button class="btn function" data-func="(">(</button>
       <button class="btn function" data-func=")">)</button>
-      <button class="btn toggle" id="toggleTheme">Toggle Dark/Light</button>
+      <button class="btn toggle" id="toggleTheme" aria-pressed="false">Toggle Dark/Light</button>
     </div>
   </div>
+
   <script>
     const screen = document.getElementById('screen');
     const buttons = document.querySelectorAll('.btn');
     const toggleBtn = document.getElementById('toggleTheme');
     let currentInput = '';
-    
-    // Ensure dark theme is applied on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.remove('light');
-      document.body.classList.add('dark');
-    });
-    
+
+    // Initial theme (dark)
+    document.body.classList.remove('light');
+    document.body.classList.add('dark');
+
+    // Factorial function (integer only)
     function factorial(n) {
+      n = Math.floor(n);
       if (n < 0) return NaN;
       if (n === 0) return 1;
       let res = 1;
       for (let i = 1; i <= n; i++) res *= i;
       return res;
     }
+
+    // Replace factorials in expression with their evaluated values
+    function replaceFactorials(expr) {
+      return expr.replace(/(\d+(\.\d+)?|\([^()]+\))!/g, (match) => {
+        let val = match.slice(0, -1);
+        try {
+          // Evaluate inner expression safely
+          val = safeEval(val);
+          const fact = factorial(val);
+          if (isNaN(fact)) throw new Error("Invalid factorial");
+          return fact.toString();
+        } catch {
+          return match; // leave as is if error
+        }
+      });
+    }
+
+    // Safely evaluate math expressions without using eval
+    function safeEval(expr) {
+      // Replace operators/symbols with JS equivalents
+      expr = expr
+        .replace(/÷/g, '/')
+        .replace(/×/g, '*')
+        .replace(/π/g, Math.PI)
+        .replace(/\be\b/g, Math.E)
+        .replace(/--/g, '+') // handle double negative
+
+      // Replace functions with Math equivalents
+      expr = expr
+        .replace(/sin\(/g, 'Math.sin(')
+        .replace(/cos\(/g, 'Math.cos(')
+        .replace(/tan\(/g, 'Math.tan(')
+        .replace(/log\(/g, 'Math.log10(')
+        .replace(/ln\(/g, 'Math.log(')
+        .replace(/sqrt\(/g, 'Math.sqrt(')
+        .replace(/exp\(/g, 'Math.exp(');
+
+      // Replace % with /100
+      expr = expr.replace(/(\d+(\.\d+)?)%/g, '($1/100)');
+
+      // Replace factorials first (already handled by replaceFactorials)
+
+      // Evaluate expression with Function constructor for better sandboxing
+      // eslint-disable-next-line no-new-func
+      const func = new Function('return ' + expr);
+      return func();
+    }
+
+    // Evaluate entire expression safely
     function evaluateExpression(expr) {
       try {
-        expr = expr.replace(/÷/g, '/').replace(/×/g, '*');
-        expr = expr.replace(/π/g, Math.PI).replace(/\be\b/g, Math.E);
-        expr = expr.replace(/sin\(/g, 'Math.sin(')
-                   .replace(/cos\(/g, 'Math.cos(')
-                   .replace(/tan\(/g, 'Math.tan(')
-                   .replace(/log\(/g, 'Math.log10(')
-                   .replace(/ln\(/g, 'Math.log(')
-                   .replace(/√/g, 'Math.sqrt');
-        expr = expr.replace(/(\d+|\([^()]*\))!/g, (match) => {
-          const number = match.slice(0, -1);
-          return factorial(eval(number));
-        });
-        return eval(expr);
+        expr = replaceFactorials(expr);
+        const result = safeEval(expr);
+        if (result === Infinity || result === -Infinity || isNaN(result)) {
+          return 'Error';
+        }
+        // Format to max 10 decimals
+        return Number.isInteger(result) ? result : parseFloat(result.toFixed(10));
       } catch {
         return 'Error';
       }
     }
+
+    // Update screen value and manage currentInput
+    function updateScreen() {
+      screen.value = currentInput;
+    }
+
     buttons.forEach(button => {
       button.addEventListener('click', () => {
         const val = button.textContent;
-        if (button.classList.contains('number') || button.classList.contains('dot') || button.dataset.func === '(' || button.dataset.func === ')') {
+        const func = button.dataset.func;
+        if (button.classList.contains('number') || button.classList.contains('dot')) {
           currentInput += val;
         } else if (button.classList.contains('operator')) {
-          currentInput += ` ${val} `;
+          if (currentInput && !/\s$/.test(currentInput)) {
+            currentInput += ` ${val} `;
+          }
         } else if (button.classList.contains('function')) {
-          const func = button.dataset.func;
-          if (['sin', 'cos', 'tan', 'sqrt', 'log', 'ln'].includes(func)) {
-            currentInput += func + '(';
-          } else if (func === 'pow') {
-            currentInput += '**2';
-          } else if (func === 'powY') {
-            currentInput += '**';
-          } else if (func === 'percent') {
-            currentInput += '/100';
-          } else if (func === 'fact') {
-            currentInput += '!';
-          } else if (func === 'pi') {
-            currentInput += 'π';
-          } else if (func === 'exp') {
-            currentInput += 'e';
+          switch (func) {
+            case 'sin':
+            case 'cos':
+            case 'tan':
+            case 'log':
+            case 'ln':
+            case 'sqrt':
+            case 'exp':
+              currentInput += `${func}(`;
+              break;
+            case 'pow':
+              currentInput += '**2';
+              break;
+            case 'powY':
+              currentInput += '**';
+              break;
+            case 'fact':
+              currentInput += '!';
+              break;
+            case 'percent':
+              currentInput += '%';
+              break;
+            case 'pi':
+              currentInput += 'π';
+              break;
+            case '(':
+            case ')':
+              currentInput += val;
+              break;
+            default:
+              break;
           }
         } else if (button.classList.contains('clear')) {
           currentInput = '';
         } else if (button.classList.contains('equal')) {
           const result = evaluateExpression(currentInput);
           screen.value = result;
-          currentInput = result.toString();
+          currentInput = result.toString() === 'Error' ? '' : result.toString();
           return;
         }
-        screen.value = currentInput;
+        updateScreen();
       });
     });
+
+    // Keyboard support
     document.addEventListener('keydown', e => {
-      if ((e.key >= '0' && e.key <= '9') || e.key === '.') {
-        currentInput += e.key;
-      } else if (['+', '-', '*', '/', '(', ')'].includes(e.key)) {
+      const allowedKeys = '0123456789+-*/().';
+      if (allowedKeys.includes(e.key)) {
         currentInput += e.key;
       } else if (e.key === 'Enter') {
+        e.preventDefault();
         const result = evaluateExpression(currentInput);
         screen.value = result;
-        currentInput = result.toString();
+        currentInput = result.toString() === 'Error' ? '' : result.toString();
         return;
       } else if (e.key === 'Backspace') {
         currentInput = currentInput.slice(0, -1);
       }
-      screen.value = currentInput;
+      updateScreen();
     });
+
+    // Toggle dark/light theme
     toggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('light');
       document.body.classList.toggle('dark');
+      const pressed = toggleBtn.getAttribute('aria-pressed') === 'true';
+      toggleBtn.setAttribute('aria-pressed', String(!pressed));
     });
-    console.log("Calculator script loaded!");
+
   </script>
 </body>
 </html>
